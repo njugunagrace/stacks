@@ -25,7 +25,13 @@ fun main(){
     }
     println(result.joinToString (""))
 
-
+    var q = Queue(5)
+    q.enQueue(1)
+    q.enQueue(2)
+    q.enQueue(3)
+    q.deQueue()
+    q.enQueue(45)
+    q.display()
 
 
 }
@@ -55,3 +61,59 @@ class Stack{
     }
 }
 
+class Queue(var capacity: Int) {
+    var data = IntArray(capacity)
+    var front = 0
+    var rear = 0
+
+    fun enQueue(value : Int) {
+        if (isFull()){
+            println("Queue is full")
+            return
+        }
+        data[rear] = value
+        rear++
+    }
+
+    fun deQueue():Int? {
+        if(isEmpty()){
+            println("Queue is empty")
+            return null
+        }
+        var remove = data[front]
+        for (i in front until rear+1){
+            data[i] = i+1
+        }
+        rear--
+        return remove
+    }
+
+    fun peek(): Int? {
+        if (isEmpty()) {
+            return null
+        }
+        return data[front]
+    }
+
+    fun isFull(): Boolean {
+        return rear == capacity
+
+    }
+
+    fun isEmpty(): Boolean {
+        return front == rear
+
+    }
+
+    fun display() {
+        if (isEmpty()){
+            return
+        }
+        for (i in front until rear ){
+            println(data[i])
+
+        }
+
+    }
+
+}
